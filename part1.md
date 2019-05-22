@@ -1,17 +1,14 @@
-### 김일해/07628/미디어플랫폼성장전략Unit
-
-
 
 ## 1)
-^^^
+```
 sudo useradd training 
 sudo passwd training 
 sudo groupadd skcc
 sudo usermod -a -G skcc training
-^^^
+```
 
 ## 2) 
-^^^
+```
 IP정보 조회 :  ip addr
 호스트명 조회 : hostname
 ip-172-31-2-76.ap-northeast-2.compute.internal
@@ -19,11 +16,11 @@ ip-172-31-11-108.ap-northeast-2.compute.internal
 ip-172-31-5-178.ap-northeast-2.compute.internal
 ip-172-31-2-186.ap-northeast-2.compute.internal
 ip-172-31-14-114.ap-northeast-2.compute.internal
-^^^
+```
 
 
 ## 3)리눅스 릴리즈 정보
-^^^
+```
 [centos@ip-172-31-2-76 ~]$ cat /etc/*release*
 CentOS Linux release 7.6.1810 (Core)
 Derived from Red Hat Enterprise Linux 7.6 (Source)
@@ -46,10 +43,10 @@ REDHAT_SUPPORT_PRODUCT_VERSION="7"
 CentOS Linux release 7.6.1810 (Core)
 CentOS Linux release 7.6.1810 (Core)
 cpe:/o:centos:centos:7
-^^^
+```
 
 ## 4)마스터 노드의 파일 시스템 정보 조회
-^^^
+```
 [centos@ip-172-31-2-76 ~]$ df
 Filesystem     1K-blocks    Used Available Use% Mounted on
 /dev/nvme0n1p1 104846316 1156260 103690056   2% /
@@ -58,10 +55,10 @@ tmpfs            7895692       0   7895692   0% /dev/shm
 tmpfs            7895692   16736   7878956   1% /run
 tmpfs            7895692       0   7895692   0% /sys/fs/cgroup
 tmpfs            1579140       0   1579140   0% /run/user/1000
-^^^
+```
 
 ## 5)yum repolist enabled
-^^^
+```
 [centos@ip-172-31-2-76 ~]$ yum repolist all
 Loaded plugins: fastestmirror
 Determining fastest mirrors
@@ -130,47 +127,47 @@ fasttrack/7/x86_64            CentOS-7 - fasttrack               disabled
 updates/7/x86_64              CentOS-7 - Updates                 enabled:  1,945
 updates-source/7              CentOS-7 - Updates Sources         disabled
 repolist: 25,578
-^^^
+```
 
 ## 6) training user info
-^^^
+```
 [centos@ip-172-31-2-76 ~]$ cat /etc/passwd
 training:x:1001:1001::/home/training:/bin/bash
-^^^
+```
 
 ## 7) skcc group info
-^^^
+```
 [centos@ip-172-31-2-76 ~]$ cat /etc/group
 skcc:x:1002:training
-^^^
+```
 
 ## 8)
-^^^
+```
 [centos@ip-172-31-2-76 ~]$ getent group skcc
 skcc:x:1002:training
-^^^
+```
 
 ## 9) 
-^^^
+```
 [centos@ip-172-31-2-76 ~]$ getent passwd training
 training:x:1001:1001::/home/training:/bin/bash
-^^^
+```
 
 ## b. Install a Mysql server
 ## 1. 
-^^^
+```
 [centos@ip-172-31-2-76 mysql-connector-java-5.1.46]$ hostname
 nd1.team5.com
-^^^
+```
 
 ## 2.
-^^^
+```
 [training@nd1 mysql-connector-java-5.1.46]$ mysql --version
 mysql  Ver 15.1 Distrib 5.5.60-MariaDB, for Linux (x86_64) using readline 5.1
-^^^
+```
 
 ## 3.
-^^^
+```
 MariaDB [(none)]> show databases;
 +--------------------+
 | Database           |
@@ -189,12 +186,12 @@ MariaDB [(none)]> show databases;
 | sentry             |
 +--------------------+
 12 rows in set (0.00 sec)
-^^^
+```
 
 
 
 ## 2. create table
-^^^
+```
 ## a.MariaDB [(none)]> create database test;
 Query OK, 1 row affected (0.01 sec)
 Database changed
@@ -218,23 +215,23 @@ MariaDB [test]> show tables;
 | posts          |
 +----------------+
 2 rows in set (0.00 sec)
-^^^
+```
 
 
 ## b. 
 
 ## c.
-^^^
+```
 MariaDB [(none)]> GRANT ALL ON *.* TO 'training'@'%' IDENTIFIED BY 'training';
 Query OK, 0 rows affected (0.00 sec)
 
 MariaDB [(none)]> FLUSH PRIVILEGES;
 Query OK, 0 rows affected (0.00 sec)
-^^^
+```
 
 ## 3.
 ## a. 
-^^^
+```
 [training@nd1 centos]$ sqoop import --connect jdbc:mysql://nd1.team5.com/test --username training --password training --table posts --target-dir /test/posts_import
 Warning: /opt/cloudera/parcels/CDH-5.15.2-1.cdh5.15.2.p0.3/bin/../lib/sqoop/../accumulo does not exist! Accumulo imports will fail.
 Please set $ACCUMULO_HOME to the root of your Accumulo installation.
@@ -307,9 +304,9 @@ Note: Recompile with -Xlint:deprecation for details.
                 Bytes Written=11037
 19/05/22 15:21:43 INFO mapreduce.ImportJobBase: Transferred 10.7783 KB in 13.7491 seconds (802.7433 bytes/sec)
 19/05/22 15:21:43 INFO mapreduce.ImportJobBase: Retrieved 29 records.
-^^^
+```
 
-^^^
+```
 mysql -> hive
 [training@nd1 centos]$ sqoop import --connect jdbc:mysql://nd1.team5.com/test --username training --password training --table authors --target-dir /test/authors_import_direct --hive-import --create-hive-table --hive-table default.authors
 Warning: /opt/cloudera/parcels/CDH-5.15.2-1.cdh5.15.2.p0.3/bin/../lib/sqoop/../accumulo does not exist! Accumulo imports will fail.
@@ -397,10 +394,10 @@ Loading data to table default.authors
 Table default.authors stats: [numFiles=4, totalSize=3547]
 OK
 Time taken: 0.247 seconds
-^^^
+```
 
 
-^^^
+```
 [training@nd1 centos]$ sqoop import --connect jdbc:mysql://nd1.team5.com/test --username training --password training --table posts --target-dir /test/posts_import_direct --hive-import --create-hive-table --hive-table default.posts
 Warning: /opt/cloudera/parcels/CDH-5.15.2-1.cdh5.15.2.p0.3/bin/../lib/sqoop/../accumulo does not exist! Accumulo imports will fail.
 Please set $ACCUMULO_HOME to the root of your Accumulo installation.
@@ -485,4 +482,4 @@ Loading data to table default.posts
 Table default.posts stats: [numFiles=4, totalSize=11037]
 OK
 Time taken: 0.238 seconds
-^^^
+```
