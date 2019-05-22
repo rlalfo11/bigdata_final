@@ -154,19 +154,19 @@ training:x:1001:1001::/home/training:/bin/bash
 ```
 
 ## b. Install a Mysql server
-## 1. 
+## 1)
 ```
 [centos@ip-172-31-2-76 mysql-connector-java-5.1.46]$ hostname
 nd1.team5.com
 ```
 
-## 2.
+## 2)
 ```
 [training@nd1 mysql-connector-java-5.1.46]$ mysql --version
 mysql  Ver 15.1 Distrib 5.5.60-MariaDB, for Linux (x86_64) using readline 5.1
 ```
 
-## 3.
+## 3)
 ```
 MariaDB [(none)]> show databases;
 +--------------------+
@@ -228,6 +228,7 @@ Query OK, 0 rows affected (0.00 sec)
 MariaDB [(none)]> FLUSH PRIVILEGES;
 Query OK, 0 rows affected (0.00 sec)
 ```
+![photo.PNG](https://github.com/rlalfo11/bigdata_final/blob/master/CM_Manager.PNG?raw=true)
 
 ## 3.
 ## a. 
