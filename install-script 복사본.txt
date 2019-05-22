@@ -264,4 +264,4 @@ sudo rm /etc/cloudera-scm-server/db.mgmt.properties
 sudo systemctl start cloudera-scm-server
 
 
-
+https://drive.google.com/drive/folders/1vHf5GdH9ahHLwnWfYeBDJn3DSkgfVYpt
