@@ -139,6 +139,9 @@ for example: https://archive.cloudera.com/cm5/redhat/7/x86_64/cm/5.14.4/
 
 sudo rpm --import \
 https://archive.cloudera.com/cm5/redhat/7/x86_64/cm/RPM-GPG-KEY-cloudera
+
+sudo yum install oracle-j2sdk1.7
+
 java -version
 
 ** Install Cloudera Manager
@@ -147,6 +150,7 @@ sudo yum install -y cloudera-manager-daemons cloudera-manager-server
 ** Install MariaDB
 
 sudo yum install -y mariadb-server
+
 { // use this repo in case yum install does not work
 sudo vi /etc/yum.repos.d/MariaDB.repo
 	add ->
@@ -234,34 +238,60 @@ sudo cp mysql-connector-java-5.1.47-bin.jar /usr/share/java/mysql-connector-java
 mysql -u root -p
 
 CREATE DATABASE scm DEFAULT CHARACTER SET utf8 DEFAULT COLLATE utf8_general_ci;
-GRANT ALL ON scm.* TO 'scm-user'@'%' IDENTIFIED BY 'somepassword';
+GRANT ALL ON scm.* TO 'scm-user'@'%' IDENTIFIED BY 'password';
 
 CREATE DATABASE amon DEFAULT CHARACTER SET utf8 DEFAULT COLLATE utf8_general_ci;
-GRANT ALL ON amon.* TO 'amon-user'@'%' IDENTIFIED BY 'somepassword';
+GRANT ALL ON amon.* TO 'amon-user'@'%' IDENTIFIED BY 'password';
 
 CREATE DATABASE rmon DEFAULT CHARACTER SET utf8 DEFAULT COLLATE utf8_general_ci;
-GRANT ALL ON rmon.* TO 'rmon-user'@'%' IDENTIFIED BY 'somepassword';
+GRANT ALL ON rmon.* TO 'rmon-user'@'%' IDENTIFIED BY 'password';
 
 CREATE DATABASE hue DEFAULT CHARACTER SET utf8 DEFAULT COLLATE utf8_general_ci;
-GRANT ALL ON hue.* TO 'hue-user'@'%' IDENTIFIED BY 'somepassword';
+GRANT ALL ON hue.* TO 'hue-user'@'%' IDENTIFIED BY 'password';
 
 CREATE DATABASE metastore DEFAULT CHARACTER SET utf8 DEFAULT COLLATE utf8_general_ci;
-GRANT ALL ON metastore.* TO 'metastore-user'@'%' IDENTIFIED BY 'somepassword';
+GRANT ALL ON metastore.* TO 'metastore-user'@'%' IDENTIFIED BY 'password';
 
 CREATE DATABASE sentry DEFAULT CHARACTER SET utf8 DEFAULT COLLATE utf8_general_ci;
-GRANT ALL ON sentry.* TO 'sentry-user'@'%' IDENTIFIED BY 'somepassword';
+GRANT ALL ON sentry.* TO 'sentry-user'@'%' IDENTIFIED BY 'password';
 
 CREATE DATABASE oozie DEFAULT CHARACTER SET utf8 DEFAULT COLLATE utf8_general_ci;
-GRANT ALL ON oozie.* TO 'oozie-user'@'%' IDENTIFIED BY 'somepassword';
+GRANT ALL ON oozie.* TO 'oozie-user'@'%' IDENTIFIED BY 'password';
 
 FLUSH PRIVILEGES;
 SHOW DATABASES;
 EXIT;
 
 ** Setup the CM database
-sudo /usr/share/cmf/schema/scm_prepare_database.sh mysql scm scm-user somepassword
+sudo /usr/share/cmf/schema/scm_prepare_database.sh mysql scm scm-user password
 sudo rm /etc/cloudera-scm-server/db.mgmt.properties
 sudo systemctl start cloudera-scm-server
 
 
-https://drive.google.com/drive/folders/1vHf5GdH9ahHLwnWfYeBDJn3DSkgfVYpt
+http://15.164.29.249:7180
+
+
+꿀팁정리
+
+Configure repository
+
+sudo wget https://archive.cloudera.com/cm5/redhat/7/x86_64/cm/cloudera-manager.repo \
+-P /etc/yum.repos.d/
+
+-P 뒤에 있는 파일 확인해보기
+
+Baseurl의 버젼만 변경해서 해당 version 설치 가능
+baseurl=https://archive.cloudera.com/cm5/redhat/6/x86_64/cm/5.7.4/
+for example: https://archive.cloudera.com/cm5/redhat/7/x86_64/cm/5.14.4/
+
+
+1.81 * 1.4 = 2.534
+1.81 * 0.73 = 1.3213 * 2 = 2.6426
+1.1 * 0.87 = 0.957 * 4 = 3.828
+1.1 * 0.42 = 0.462 * 2 = 0.924
+2.08 * 0.9 = 1.872 * 2 = 3.744
+0.8 * 0.32 = 0.256 * 2 = 0.512
+
+15
+
+하이브 == 메타스토어
