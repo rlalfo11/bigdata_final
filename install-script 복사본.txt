@@ -295,3 +295,5 @@ for example: https://archive.cloudera.com/cm5/redhat/7/x86_64/cm/5.14.4/
 15
 
 하이브 == 메타스토어
+
+https://drive.google.com/drive/folders/1vHf5GdH9ahHLwnWfYeBDJn3DSkgfVYpt
