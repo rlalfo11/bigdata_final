@@ -2,8 +2,8 @@
 ![photo.PNG](https://github.com/rlalfo11/Spark-/blob/master/IMG_20190520_125323.jpg?raw=true)
 
 ##자리번호
-'''
+```
 5
-'''
+```
 
 
